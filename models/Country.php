@@ -65,12 +65,10 @@ class Country extends ActiveRecord
     public function uploadImage()
     {
         if ($this->upload) {
-            if ($this->validate()) {
+
                 $this->upload->saveAs('uploads/' . $this->upload->baseName . '.' . $this->upload->extension);
                 return $this->upload->baseName . '.' . $this->upload->extension;
-            } else {
-                return false;
-            }
+
         }
         return false;
     }
