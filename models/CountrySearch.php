@@ -49,6 +49,7 @@ class CountrySearch extends Country
             'pagination' => [
                 'pageSize' => $pageSize,  // no pagination if it is 0
             ],
+            'sort' => ['attributes' => ['SKU','name','Qty','Type','imageFile']]
         ]);
 
         $this->load($params);

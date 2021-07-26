@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Country */
@@ -33,8 +34,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'Qty',
             'Type',
-            'Pic',
+            'imageFile',
+            [
+                'label' => 'Image',
+                'format' => 'image',
+                'contentOptions'=>['class'=> 'img1'],
+                'value' => function ($model) {
+                    return $model->getImageUrl();
+                },
+            ],
         ],
+
+
+
+
+
     ]) ?>
 
 </div>

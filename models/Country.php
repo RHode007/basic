@@ -37,7 +37,7 @@ class Country extends ActiveRecord
             [['Type'], 'string', 'min' => 2],
             [['name'], 'string', 'max' => 52],
             [['SKU'], 'unique'],
-            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+//            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
         ];
     }
 
@@ -54,22 +54,8 @@ class Country extends ActiveRecord
             'imageFile' => 'imageFile',
         ];
     }
-
-
-    /**
-     * @var UploadedFile
-     * Вспомогательный атрибут для загрузки изображения
-     */
-    public $upload;
-
-    public function uploadImage()
+    public function getImageurl()
     {
-        if ($this->upload) {
-
-                $this->upload->saveAs('uploads/' . $this->upload->baseName . '.' . $this->upload->extension);
-                return $this->upload->baseName . '.' . $this->upload->extension;
-
-        }
-        return false;
+        return Yii::getAlias('@web') .'uploads/' . $this->imageFile;
     }
 }

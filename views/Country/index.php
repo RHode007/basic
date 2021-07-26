@@ -17,6 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+        <?php if (!Yii::$app->user->getIsGuest()){ ?>
+
         <?= Html::a('Create Country', ['create'], ['class' => 'btn btn-success']) ?>
 
         <!--// keys is an array consisting of the keys associated with the selected rows
@@ -50,6 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
             $this::POS_READY,
             'btn btn-danger'
         );
+        }
 
         Modal::begin([
             'header' => '<h2>Column toggle</h2>',
@@ -66,6 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
         echo Html::button('Name', ['id' => 'hide-name', 'title' => 'Title', 'class' => 'showModalButton btn btn-success']);
         echo Html::button('Qty', ['id' => 'hide-Qty', 'title' => 'Title', 'class' => 'showModalButton btn btn-success']);
         echo Html::button('Type', ['id' => 'hide-Type', 'title' => 'Title', 'class' => 'showModalButton btn btn-success']);
+        echo Html::button('Image', ['id' => 'hide-Image', 'title' => 'Title', 'class' => 'showModalButton btn btn-success']);
 
         $this->registerJs("
         $('#hide-id').on('click', function(){
@@ -81,6 +85,9 @@ $this->params['breadcrumbs'][] = $this->title;
             $('.listing-Qty').toggle();
         });
         $('#hide-Type').on('click', function(){
+            $('.listing-Type').toggle();
+        });
+        $('#hide-Image').on('click', function(){
             $('.listing-Type').toggle();
         });
         ");
@@ -108,6 +115,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'contentOptions' => ['class' => 'listing-id'],
             'headerOptions' => ['class' => 'listing-id'],
             'filterOptions' => ['class' => 'listing-id'],
+            'visible'=>!Yii::$app->user->getIsGuest()
             ],
             [//'class' => 'yii\grid\SerialColumn',=
             'label' => 'SKU',
@@ -138,7 +146,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'headerOptions' => ['class' => 'listing-Type'],
             'filterOptions' => ['class' => 'listing-Type'],
             ],
-            ['class' => 'yii\grid\ActionColumn'],
+            ['label' => 'Картинка',
+            'attribute' => 'imageFile',
+            'format' => 'image',
+            'options' => [ 'Image' => 'listing-Image'],
+            'value' => function($model) { return $model->getImageUrl(); },
+            'headerOptions' => ['style' => 'width:20%;','class' => 'listing-Type'],
+            'contentOptions' => ['class' => 'img1 listing-Type'],
+            'filterOptions' => ['class' => 'listing-Type'],
+            ],
+            ['class' => 'yii\grid\ActionColumn',
+            'visible'=>!Yii::$app->user->getIsGuest()
+            ],
         ],
     ]); ?>
 

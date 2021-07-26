@@ -10,24 +10,29 @@ use yii\widgets\ActiveForm;
 
 <div class="country-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
 
-    <fieldset>
+   <!-- <fieldset>
         <legend>Загрузить изображение</legend>
-        <?= $form->field($model, 'imageFile')->fileInput(); ?>
-        <?php if (!empty($model->imageFile)) {
+        <?/*= $form->field($model, 'imageFile')->fileInput(); */?>
+        <?php /*if (!empty($model->imageFile)) {
             $img = Yii::getAlias('@webroot') . '/uploads/' . $model->imageFile;
             if (is_file($img)) {
                 $url = Yii::getAlias('@web') . '/uploads/' . $model->imageFile;
                 echo 'Уже загружено ', Html::a('изображение', $url, ['target' => '_blank']);
                 echo '<img src="/uploads/',$model->imageFile,'" style="max-width:10%" alt="";>';
             }
-        }?>
-    </fieldset>
+        }*/?>
+    </fieldset>-->
+    <?php
+    if(isset($model->imageFile) && file_exists(Yii::getAlias('@webroot', $model->imageFile)))
+    {
+        echo Html::img(Yii::getAlias('@web') .'uploads/' . $model->imageFile, ['class'=>'img-responsive','style'=>'max-width:10%']);
+    }
+    ?>
+    <?= $form->field($model, 'imageFile')->fileInput() ?>
 
-   <!-- <?/*= $form->field($model, 'Pic')->fileInput() */?>
-    <button>Submit</button>-->
     <?= $form->field($model, 'SKU')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'Qty')->textInput() ?>

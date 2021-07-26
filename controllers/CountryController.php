@@ -48,20 +48,6 @@ class CountryController extends Controller
             'pageSize' => $pageSize,
         ]);
     }
-//TODO Вынести в отдельную функцию для create
-    public function actionAddimage()
-    {
-        $model = new Country();
-        if (Yii::$app->request->isPost) {
-            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            if ($name = $model->upload()) {
-                // file is uploaded successfully
-                $model->imageFile = $name;
-                return $this->redirect(['index']);
-            }
-        }
-        return $this->render('addimage', ['model' => $model]);
-    }
 
     /**
      * Displays a single Country model.
@@ -85,8 +71,11 @@ class CountryController extends Controller
     {
         $model = new Country();
 
-        $this->Addimage($model);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $upload = UploadedFile::getInstance($model, 'imageFile');
+            $upload->saveAs(Yii::getAlias('@web') .'uploads/' . $model->SKU.'.'.$upload->extension);
+            $model->imageFile = $model->SKU.'.'.$upload->extension;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->SKU]);
         }
 
@@ -112,23 +101,15 @@ class CountryController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+
     public function actionUpdate($id){
         $model = $this->findModel($id);
-        $old = $model->imageFile;
         if ($model->load(Yii::$app->request->post())) {
-            $model->upload = UploadedFile::getInstance($model, 'imageFile');
-            if ($new = $model->uploadImage()) { // если изображение было загружено
-                if ($old !== null) { // удаляем старое изображение
-                    //$model::removeImage($old); //TODO Добавить removeImage
-                }
-                $model->imageFile = $new; // сохраняем в БД новое имя
-            } else { // оставляем старое изображение
-                $model->imageFile = $old;
-            }
-            //$model->save();
-        }
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->SKU]);
+            $upload = UploadedFile::getInstance($model, 'imageFile');
+            $upload->saveAs(Yii::getAlias('@web') .'uploads/' . $model->SKU.'.'.$upload->extension);
+            $model->imageFile = $model->SKU.'.'.$upload->extension;
+            $model->save();
+            return $this->redirect(['view', 'id' => $model->SKU]);
         }
 
         return $this->render('update', [
@@ -165,12 +146,5 @@ class CountryController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-    protected function Addimage($model)
-    {
-        //$model = new Country();
-
-        //return $this->render('addimage', ['model' => $model]);
     }
 }

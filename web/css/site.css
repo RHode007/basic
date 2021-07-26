@@ -113,3 +113,12 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+
+.img1>img{
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+table { table-layout: fixed; width: 100%; }
