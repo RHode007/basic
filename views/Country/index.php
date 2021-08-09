@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'footer' => 'Низ окна',
         ]);
 
-        echo Html::button('id', ['id' => 'hide-id', 'title' => 'Title', 'class' => 'showModalButton btn btn-success']);
+        echo Html::button('Checkbox', ['id' => 'hide-id', 'title' => 'Title', 'class' => 'showModalButton btn btn-success']);
         echo Html::button('SKU', ['id' => 'hide-SKU', 'title' => 'Title', 'class' => 'showModalButton btn btn-success']);
         echo Html::button('Name', ['id' => 'hide-name', 'title' => 'Title', 'class' => 'showModalButton btn btn-success']);
         echo Html::button('Qty', ['id' => 'hide-Qty', 'title' => 'Title', 'class' => 'showModalButton btn btn-success']);
@@ -151,9 +151,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'format' => 'image',
             'options' => [ 'Image' => 'listing-Image'],
             'value' => function($model) { return $model->getImageUrl(); },
-            'headerOptions' => ['style' => 'width:20%;','class' => 'listing-Type'],
-            'contentOptions' => ['class' => 'img1 listing-Type'],
-            'filterOptions' => ['class' => 'listing-Type'],
+            'headerOptions' => ['style' => 'width:20%;','class' => 'listing-Image'],
+            'contentOptions' => ['class' => 'img1 listing-Image'],
+            'filterOptions' => ['class' => 'listing-Image'],
             ],
             ['class' => 'yii\grid\ActionColumn',
             'visible'=>!Yii::$app->user->getIsGuest()

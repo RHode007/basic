@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  phpunit:
+    init: true
+    build:
+      context: docker
+    working_dir: /project
+    volumes:
+      - ./../:/project:rw
+      - ./../src:/project/src:ro
+    environment:
+      TEST_RUNTIME_PATH: /tmp/runtime
+    tmpfs:
+    - /runtime
+    depends_on:
+      - mariadb
+    entrypoint: ["vendor/bin/phpunit"]
+  mariadb:
+    image: mariadb
+    volumes:
+      - ./data/mariadb.sql:/docker-entrypoint-initdb.d/mariadb.sql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_DATABASE: yiitest

@@ -1,0 +1,7 @@
+Options -Indexes
+IndexIgnore */*
+
+Options FollowSymlinks
+RewriteEngine on
+RewriteRule ^admin(/.+)?$ web/$1 [L,PT]
+RewriteRule ^(.+)?$ web/$1

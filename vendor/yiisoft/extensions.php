@@ -48,4 +48,13 @@ return array (
       '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker/src',
     ),
   ),
+  'sam-it/yii2-mariadb' => 
+  array (
+    'name' => 'sam-it/yii2-mariadb',
+    'version' => '3.1.0.0',
+    'alias' => 
+    array (
+      '@SamIT/Yii2/MariaDb' => $vendorDir . '/sam-it/yii2-mariadb/src',
+    ),
+  ),
 );

@@ -56,6 +56,6 @@ class Country extends ActiveRecord
     }
     public function getImageurl()
     {
-        return Yii::getAlias('@web') .'uploads/' . $this->imageFile;
+            return Yii::getAlias('@web') .'uploads/' . $this->imageFile;
     }
 }
