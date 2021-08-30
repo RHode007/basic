@@ -49,9 +49,9 @@ $offer->article     = 'AZ105R';
 $offer->unit        = new Unit('796', 'Piece', 'pcs');
 
 $item->offer         = $offer;
-$item->priceType     = new PriceType('base');
+//$item->priceType     = new PriceType('base');
 $item->quantity      = 1;
-$item->purchasePrice = 60;
+//$item->purchasePrice = 60;
 
 //$order->delivery      = $delivery;
 $order->company->brand='Azalita';
@@ -65,18 +65,18 @@ $order->lastName      = 'Vengerenko';
 $order->patronymic    = 'Alexandrovic';
 $order->phone         = '89003005069';
 $order->customerComment = 'тестовое задание';
-$order->managerComment = '89003005069';
+$order->managerComment = 'https://github.com/RHode007/basic/blob/f3a66a222a815903a8976387aa154049ae477261/index.php';
 $order->email         = 'testuser12345678901@example.com';
-$order->managerId     = 28;
+/*$order->managerId     = 28;
 $order->customer      = SerializedRelationCustomer::withIdAndType(
     4924,
     CustomerType::CUSTOMER
-);
+);*/
 $order->status        = 'trouble';
 $order->number        = '5111999';
 $order->weight        = 1000;
-$order->shipmentStore = 'main12';
-$order->shipmentDate  = (new DateTime())->add(new DateInterval('P7D'));
+//$order->shipmentStore = 'main12';
+//$order->shipmentDate  = (new DateTime())->add(new DateInterval('P7D'));
 $order->shipped       = false;
 $order->customFields  = [
     "galka" => false,
